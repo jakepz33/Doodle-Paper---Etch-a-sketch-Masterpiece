@@ -1,0 +1,21 @@
+HTML
+<div class="container">
+</div>
+
+
+JS
+const container = document.querySelector(".container");
+let counter =1
+
+function gridMaker(number) {
+  for (i=0; i<number; i++) {
+
+    counter += 1
+    let div = document.createElement('div');
+    div.textContent = counter;
+    container.appendChild(div);
+
+  }
+}
+
+gridMaker(30)
