@@ -70,6 +70,7 @@ button {
 #item1 div {
   /* background-color: rgb(163, 219, 228); */
   color: #f8f6f6;
+  user-select: none;
   /* border: 1px solid white; */
 }
 #item1 div:hover {

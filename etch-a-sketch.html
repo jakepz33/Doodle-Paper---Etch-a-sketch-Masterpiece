@@ -8,7 +8,7 @@
 </head>
 <body>
   <section class="section">
-    <p>Hello there</p>
+    <!-- <p>Hello there</p> -->
     <div style="border: 2px solid black;" class="title">
       <h1 style="text-align:center;">Etch-a-Sketch</h1>
     </div>
@@ -44,88 +44,100 @@
     </div>
       
   </section>
-      <script>
-        const gridContainer = document.querySelector("#item1");
-        let counter = 0
-        //gridMaker(16); // sets default grid at 16
-        
-        function gridMaker(number) {
-            clearGrid();
-            let userNum = number;
-            let numSquared = number * number;
-            console.log(numSquared);
-            for(i=0; i<numSquared; i++) {
-                let divItem = document.createElement('div');
-                divItem.classList.add('new');
-                counter += 1;
-                //divItem.textContent = counter;
-                gridContainer.appendChild(divItem);
-            }
-            scaleCSS(userNum);
-            addGridItemEventListeners();
+  <script>
+    const gridContainer = document.querySelector("#item1");
+    let counter = 0
+    //gridMaker(16); // sets default grid at 16
+    
+    function gridMaker(number) {
+        clearGrid();
+        let userNum = number;
+        let numSquared = number * number;
+        console.log(numSquared);
+        for(i=0; i<numSquared; i++) {
+            let divItem = document.createElement('div');
+            divItem.classList.add('new');
+            counter += 1;
+            //divItem.textContent = counter;
+            gridContainer.appendChild(divItem);
         }
-        // Runs this first to set grid
-        // function to clear gridContainer:
-        function clearGrid() {
-            while (gridContainer.firstChild) {
-                gridContainer.removeChild(gridContainer.firstChild);
-            }
-        }
-
-        function scaleCSS(number) {
-            gridContainer.style.cssText = `grid-template-columns: repeat(${number}, 1fr); grid-template-rows: repeat(${number}, 1fr);`;
-        }
-        //gridMaker(50);
-
-        //Get slider value//
-        const slider = document.getElementById("myRange");
-        const sliderValue = document.getElementById("sliderValue");
-        function updateSliderValue() {
-            sliderValue.textContent = slider.value;
-            let userChoice = slider.value;
-            gridMaker(userChoice);
-        }
-        slider.addEventListener("input", updateSliderValue);
-
-        updateSliderValue();
-
-        ///Change color when clicked
-        let divClicked = document.querySelectorAll(".new");
-        //console.log(divClicked)
-        let isMouseDown = false;
-
-        // divClicked.forEach(function (div) { //clicked function
-        //     div.addEventListener("click", function () {
-        //         div.classList.toggle("clickedBlack");
-        //     })
-        //  })
-        function addGridItemEventListeners() {
-            const divClicked = gridContainer.querySelectorAll(".new");
-            let isMouseDown = false;
-            divClicked.forEach(function (div) {
-                div.addEventListener("mousedown", (event) => {
-                    isMouseDown = true;
-                    event.target.classList.add("clickedBlack");
-                })
-                div.addEventListener("mouseup", () => {
-                    isMouseDown = false; 
-                })
-
-                div.addEventListener("mouseover", (event) => {
-                    if (isMouseDown && event.buttons === 1) {
-                        event.target.classList.add("clickedBlack");
-                    }
-                })
-                div.addEventListener("mouseout", () => {
-                
-                })
-            })
-        }
-
+        scaleCSS(userNum);
         addGridItemEventListeners();
-        
+    }
+    // Runs this first to set grid
+    // function to clear gridContainer:
+    function clearGrid() {
+        while (gridContainer.firstChild) {
+            gridContainer.removeChild(gridContainer.firstChild);
+        }
+    }
 
-      </script>
+    function scaleCSS(number) {
+        gridContainer.style.cssText = `grid-template-columns: repeat(${number}, 1fr); grid-template-rows: repeat(${number}, 1fr);`;
+    }
+    //gridMaker(50);
+
+    //Get slider value//
+    const slider = document.getElementById("myRange");
+    const sliderValue = document.getElementById("sliderValue");
+    function updateSliderValue() {
+        sliderValue.textContent = slider.value;
+        let userChoice = slider.value;
+        gridMaker(userChoice);
+    }
+    slider.addEventListener("input", updateSliderValue);
+
+    updateSliderValue();
+
+    ///Change color when clicked
+    let divClicked = document.querySelectorAll(".new");
+    //console.log(divClicked)
+    let isMouseDown = false;
+
+    // divClicked.forEach(function (div) { //clicked function
+    //     div.addEventListener("click", function () {
+    //         div.classList.toggle("clickedBlack");
+    //     })
+    //  })
+    function addGridItemEventListeners() {
+        const divClicked = gridContainer.querySelectorAll(".new");
+        let isMouseDown = false;
+        divClicked.forEach(function (div) {
+            div.addEventListener("mousedown", (event) => {
+                isMouseDown = true;
+                event.target.classList.add("clickedBlack");
+            })
+            div.addEventListener("mouseup", () => {
+                isMouseDown = false; 
+            })
+
+            div.addEventListener("mouseover", (event) => {
+                if (isMouseDown && event.buttons === 1) {
+                    event.target.classList.add("clickedBlack");
+                }
+            })
+            div.addEventListener("mouseout", () => {
+            
+            })
+        })
+    }
+
+    addGridItemEventListeners();
+    // BUTTONS 
+    // clear board
+    const clearButton = document.getElementById("clear");
+    function clearBoard() {
+      // target div with added class .clickedBlack
+      // remove .clickedBlack
+      const targetDiv = gridContainer.querySelectorAll(".clickedBlack");
+      targetDiv.forEach(function (item) {
+        item.classList.remove('clickedBlack');
+      })
+
+    }
+    clearButton.addEventListener("click", clearBoard);
+
+  </script>
     
 </body>
 </html>
