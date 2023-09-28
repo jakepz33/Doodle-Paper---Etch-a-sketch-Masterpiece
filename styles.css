@@ -81,6 +81,10 @@ button {
 .clickedBlack {
   background-color: black;
 }
+
+/* Dynamic button */
+
+
 /* BUTTON CSS */
 #color-button {
   border: 10px solid blueviolet;
@@ -112,7 +116,7 @@ button {
 }
 
 .button-4:hover {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6bb;
   text-decoration: none;
   transition-duration: 0.1s;
 }
@@ -124,11 +128,11 @@ button {
   cursor: default;
 }
 
-.button-4:active {
+/* .button-4:active {
   background-color: #EDEFF2;
   box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
   transition: none 0s;
-}
+} */
 
 .button-4:focus {
   outline: 1px transparent;
@@ -140,6 +144,9 @@ button {
 
 .button-4:-webkit-details-marker {
   display: none;
+}
+.clicked {
+  background-color: #f3f4f6bb;
 }
 /* Slider css */
 .slider {

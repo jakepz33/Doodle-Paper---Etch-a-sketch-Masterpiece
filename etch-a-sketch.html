@@ -21,7 +21,7 @@
             <button class="button-4" role="button">Multi-color</button>
         </div>
         <div class="items-one">
-            <button class="button-4" role="button">Erase</button>
+            <button class="button-4" id="eraser" role="button">Eraser</button>
         </div>
         <div class="items-one">
             <button class="button-4" id="clear" role="button">Clear <spans style="color:rgb(177, 181, 185)">X</span></button>
@@ -92,27 +92,62 @@
     ///Change color when clicked
     let divClicked = document.querySelectorAll(".new");
     //console.log(divClicked)
-    let isMouseDown = false;
+    // let isMouseDown = false;
 
     // divClicked.forEach(function (div) { //clicked function
     //     div.addEventListener("click", function () {
     //         div.classList.toggle("clickedBlack");
     //     })
     //  })
+    const eraserButton = document.getElementById("eraser");
+    let isClicked = false;
+    let isMouseDown = false;
+
+    eraserButton.addEventListener("click", function() {
+      isClicked = !isClicked;
+      if (isClicked) {
+        eraserButton.classList.add("clicked");
+      }else {
+        eraserButton.classList.remove("clicked");
+      }
+      const blackDivs = gridContainer.querySelectorAll(".clickedBlack");
+      blackDivs.forEach(function(div) {
+        div.addEventListener("mousedown", function() {
+          if (isClicked) {
+            div.classList.remove("clickedBlack");
+            isMouseDown = true;
+          }
+        });
+
+        div.addEventListener("mouseup", function() {
+          isMouseDown = false;
+        });
+
+        div.addEventListener("mouseover", function() {
+          if(isClicked && isMouseDown) {
+            div.classList.remove("clickedBlack");
+          }
+        })
+        })
+      })
+
+
     function addGridItemEventListeners() {
         const divClicked = gridContainer.querySelectorAll(".new");
         let isMouseDown = false;
         divClicked.forEach(function (div) {
             div.addEventListener("mousedown", (event) => {
+              if (!isClicked) {
                 isMouseDown = true;
                 event.target.classList.add("clickedBlack");
+              }
             })
             div.addEventListener("mouseup", () => {
                 isMouseDown = false; 
             })
 
             div.addEventListener("mouseover", (event) => {
-                if (isMouseDown && event.buttons === 1) {
+                if (!isClicked && isMouseDown && event.buttons === 1) {
                     event.target.classList.add("clickedBlack");
                 }
             })
@@ -137,7 +172,12 @@
     }
     clearButton.addEventListener("click", clearBoard);
 
-  </script>
-    
+    // eraser button
+
+
+
+    //event listener for black divs
+
+  </script> 
 </body>
 </html>
