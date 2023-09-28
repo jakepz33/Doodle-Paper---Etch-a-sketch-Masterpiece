@@ -1,62 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+  <title>Document</title>
 </head>
 <body>
-    <section class="section">
-        <p>Hello there</p>
-        <div style="border: 2px solid black;" class="title">
-          <h1 style="text-align:center;">Etch-a-Sketch</h1>
+  <section class="section">
+    <p>Hello there</p>
+    <div style="border: 2px solid black;" class="title">
+      <h1 style="text-align:center;">Etch-a-Sketch</h1>
+    </div>
+    <div class="flex-container">
+      <div class="flex" id="one">
+        <div class="items-one">
+            <button class="button-4" id="color-button" role="button">Color</button>
         </div>
-        <div class="flex-container">
-          <div class="flex" id="one">
-            <div class="items-one">
-                <button class="button-4" id="color-button" role="button">Color</button>
-            </div>
-            <div class="items-one">
-                <button class="button-4" role="button">Multi-color</button>
-            </div>
-            <div class="items-one">
-                <button class="button-4" role="button">Erase</button>
-            </div>
-            <div class="items-one">
-                <button class="button-4" role="button">Clear <spans style="color:rgb(177, 181, 185)">X</span></button>
-            </div>
-          </div>
-          <div class="flex" id="two">
-            <div class="items" id="item1">
-                
-            </div>
-            <div class="items" id = "item2">
-                <div class="slidecontainer">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                </div>
-            </div>
-          </div>
-          <div class="flex" id="three">
-            <p>Empty container; Spacing purposes</p>
-          </div>
+        <div class="items-one">
+            <button class="button-4" role="button">Multi-color</button>
         </div>
-        
-      </section>
+        <div class="items-one">
+            <button class="button-4" role="button">Erase</button>
+        </div>
+        <div class="items-one">
+            <button class="button-4" id="clear" role="button">Clear <spans style="color:rgb(177, 181, 185)">X</span></button>
+        </div>
+      </div>
+      <div class="flex" id="two">
+        <div class="items" id="item1">
+            
+        </div>
+        <div class="items" id = "item2">
+            <div class="slidecontainer">
+                <input type="range" min="16" max="100" value="16" class="slider" id="myRange">
+                <span id="sliderValue">16</span>
+            </div>
+        </div>
+      </div>
+      <div class="flex" id="three">
+        <p>Empty container; Spacing purposes</p>
+      </div>
+    </div>
+      
+  </section>
       <script>
         const gridContainer = document.querySelector("#item1");
         let counter = 0
+        //gridMaker(16); // sets default grid at 16
         
         function gridMaker(number) {
-            for(i=0; i<number; i++) {
+            clearGrid();
+            let userNum = number;
+            let numSquared = number * number;
+            console.log(numSquared);
+            for(i=0; i<numSquared; i++) {
                 let divItem = document.createElement('div');
                 divItem.classList.add('new');
                 counter += 1;
                 //divItem.textContent = counter;
                 gridContainer.appendChild(divItem);
             }
+            scaleCSS(userNum);
+            addGridItemEventListeners();
         }
-        gridMaker(625);
+        // Runs this first to set grid
+        // function to clear gridContainer:
+        function clearGrid() {
+            while (gridContainer.firstChild) {
+                gridContainer.removeChild(gridContainer.firstChild);
+            }
+        }
+
+        function scaleCSS(number) {
+            gridContainer.style.cssText = `grid-template-columns: repeat(${number}, 1fr); grid-template-rows: repeat(${number}, 1fr);`;
+        }
+        //gridMaker(50);
+
+        //Get slider value//
+        const slider = document.getElementById("myRange");
+        const sliderValue = document.getElementById("sliderValue");
+        function updateSliderValue() {
+            sliderValue.textContent = slider.value;
+            let userChoice = slider.value;
+            gridMaker(userChoice);
+        }
+        slider.addEventListener("input", updateSliderValue);
+
+        updateSliderValue();
+
+        ///Change color when clicked
+        let divClicked = document.querySelectorAll(".new");
+        //console.log(divClicked)
+        let isMouseDown = false;
+
+        // divClicked.forEach(function (div) { //clicked function
+        //     div.addEventListener("click", function () {
+        //         div.classList.toggle("clickedBlack");
+        //     })
+        //  })
+        function addGridItemEventListeners() {
+            const divClicked = gridContainer.querySelectorAll(".new");
+            let isMouseDown = false;
+            divClicked.forEach(function (div) {
+                div.addEventListener("mousedown", (event) => {
+                    isMouseDown = true;
+                    event.target.classList.add("clickedBlack");
+                })
+                div.addEventListener("mouseup", () => {
+                    isMouseDown = false; 
+                })
+
+                div.addEventListener("mouseover", (event) => {
+                    if (isMouseDown && event.buttons === 1) {
+                        event.target.classList.add("clickedBlack");
+                    }
+                })
+                div.addEventListener("mouseout", () => {
+                
+                })
+            })
+        }
+
+        addGridItemEventListeners();
+        
 
       </script>
     
