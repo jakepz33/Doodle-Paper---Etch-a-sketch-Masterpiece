@@ -186,9 +186,11 @@
     function clearBoard() {
       // target div with added class .clickedBlack
       // remove .clickedBlack
-      const targetDiv = gridContainer.querySelectorAll(".clickedBlack");
+      const targetDiv = gridContainer.querySelectorAll(".clickedBlack, .colored");
       targetDiv.forEach(function (item) {
+        item.style.backgroundColor = "";
         item.classList.remove('clickedBlack');
+        //item.classList.remove('colored');
       })
 
     }
