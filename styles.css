@@ -87,7 +87,9 @@ button {
 
 /* BUTTON CSS */
 #color-button {
-  border: 10px solid blueviolet;
+  /* border: 10px solid blueviolet; */
+  width: 150px;
+  height: 50px;
 }
 .button-4 {
   appearance: none;

@@ -15,7 +15,7 @@
     <div class="flex-container">
       <div class="flex" id="one">
         <div class="items-one">
-            <button class="button-4" id="color-button" role="button">Color</button>
+            <input type="color" class="button-4" id="color-button" role="button"></input>
         </div>
         <div class="items-one">
             <button class="button-4" role="button">Multi-color</button>
@@ -99,6 +99,7 @@
     //         div.classList.toggle("clickedBlack");
     //     })
     //  })
+    // ERASER BUTTON
     const eraserButton = document.getElementById("eraser");
     let isClicked = false;
     let isMouseDown = false;
@@ -158,8 +159,9 @@
     }
 
     addGridItemEventListeners();
+
     // BUTTONS 
-    // clear board
+    // CLEAR BOARD BUTTON
     const clearButton = document.getElementById("clear");
     function clearBoard() {
       // target div with added class .clickedBlack
@@ -172,11 +174,21 @@
     }
     clearButton.addEventListener("click", clearBoard);
 
-    // eraser button
+    // COLOR SELECTOR BUTTON
+    //get color value
+    const colorButton = document.querySelector("#color-button");
+
+    colorButton.addEventListener("input", function(event) {
+      
+      const selectedColor = event.target.value;
+      console.log(selectedColor);
+
+    })
+    
 
 
 
-    //event listener for black divs
+
 
   </script> 
 </body>
