@@ -1,9 +1,9 @@
 body {
-  background-color: #24292E;
+  background-color: #ebeced;
 }
 .section {
-  background-color: #24292E;
-  padding-top: 30px;
+  background-color: #ebeced;
+  padding-top: 25px;
   margin: auto;
   height: 850px;
   /* width: 95%; */
@@ -11,14 +11,14 @@ body {
 }
 
 .title {
-  background-color: #24292E;
+  background-color: #ebeced;
 }
 .title h1{
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
 }
 .flex-container {
-  background-color: rgb(54, 81, 89);
+  background-color: #ebeced;
 }
 .flex-container {
   height: 600px;
@@ -61,7 +61,7 @@ body {
   justify-content: center;
   align-items: center;
   /* background-color: #e6e1e4; */
-  background-color: #646b71;
+  background-color: #383a3b;
 }
 .slidecontainer {
   /* background-color: ; */
