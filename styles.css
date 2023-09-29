@@ -84,7 +84,9 @@ button {
 
 /* Dynamic button */
 
-
+.clickedColor {
+  
+}
 /* BUTTON CSS */
 #color-button {
   /* border: 10px solid blueviolet; */

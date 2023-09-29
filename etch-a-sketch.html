@@ -104,6 +104,9 @@
     let isClicked = false;
     let isMouseDown = false;
 
+    let colorChose = null;
+    console.log(colorChose);
+
     eraserButton.addEventListener("click", function() {
       isClicked = !isClicked;
       if (isClicked) {
@@ -111,12 +114,14 @@
       }else {
         eraserButton.classList.remove("clicked");
       }
-      const blackDivs = gridContainer.querySelectorAll(".clickedBlack");
+      const blackDivs = gridContainer.querySelectorAll(".clickedBlack, .colored");
       blackDivs.forEach(function(div) {
         div.addEventListener("mousedown", function() {
           if (isClicked) {
-            div.classList.remove("clickedBlack");
             isMouseDown = true;
+            div.classList.remove("clickedBlack");
+            div.classList.remove("colored");
+            div.style.backgroundColor = "";
           }
         });
 
@@ -127,6 +132,8 @@
         div.addEventListener("mouseover", function() {
           if(isClicked && isMouseDown) {
             div.classList.remove("clickedBlack");
+            div.classList.remove("colored");
+            div.style.backgroundColor = "";
           }
         })
         })
@@ -140,7 +147,16 @@
             div.addEventListener("mousedown", (event) => {
               if (!isClicked) {
                 isMouseDown = true;
-                event.target.classList.add("clickedBlack");
+                if (colorChose=== null) {
+                  event.target.classList.add("clickedBlack")
+                } else {
+                  // what happens when color is chosen
+                  //event.target.classList.add("colored")
+                  let targetElement = event.target;
+                  targetElement.classList.add("colored");
+                  targetElement.style.backgroundColor = colorChose;
+                }
+                //event.target.classList.add("clickedBlack");
               }
             })
             div.addEventListener("mouseup", () => {
@@ -148,8 +164,12 @@
             })
 
             div.addEventListener("mouseover", (event) => {
-                if (!isClicked && isMouseDown && event.buttons === 1) {
-                    event.target.classList.add("clickedBlack");
+                if (!isClicked && isMouseDown && event.buttons === 1 && colorChose=== null) {
+                  event.target.classList.add("clickedBlack");
+                } else if(!isClicked && isMouseDown && event.buttons === 1){
+                  let targetElement = event.target;
+                  targetElement.classList.add("colored");
+                  targetElement.style.backgroundColor = colorChose
                 }
             })
             div.addEventListener("mouseout", () => {
@@ -178,10 +198,17 @@
     //get color value
     const colorButton = document.querySelector("#color-button");
 
+    colorButton.addEventListener("click", function() {
+      isClicked = false;
+      eraserButton.classList.remove("clicked");
+    })
+
     colorButton.addEventListener("input", function(event) {
-      
+      isClicked = false;
+      eraserButton.classList.remove("clicked")
       const selectedColor = event.target.value;
       console.log(selectedColor);
+      colorChose = selectedColor;
 
     })
     
